@@ -12,7 +12,6 @@
     <body>
 <!--        <p>Pokemon Game</p>-->
         <canvas id='mycanvas' width="1200px" height="720px">
-        
         </canvas>
         
         <script>
@@ -21,7 +20,8 @@
             var game_over = false;
             var canvas = document.getElementById('mycanvas');
             var pen = canvas.getContext('2d');
-            /*pen.fillStyle = "orange";
+            /*
+			pen.fillStyle = "orange";
             pen.fillRect(50,50,100,100);
             pen.fillStyle = "rgba(100,10,20,1)"; // a is opacity. 1->opaque , 0->transparent
             pen.fillRect(150,150,60,60);    
@@ -61,7 +61,7 @@
                 w:60,
                 h:60,
                 speedX:6,
-                ismoving:false,
+                //ismoving:false,
             };
             var goal = {
                 x:GAME_W-90,
@@ -69,6 +69,7 @@
                 w:80,
                 h:80,
             };
+			
             var playerimg = new Image;
             playerimg.src = 'Assets/ball.png';
             
@@ -83,14 +84,26 @@
 
             var goalimg = new Image;
             goalimg.src = 'Assets/pika.png';
-        
+            
+			/*
 			canvas.addEventListener('mousedown',function(){
                 player.ismoving=true;
             });
             canvas.addEventListener('mouseup',function(){
                 player.ismoving=false;
             });
-        	
+        	*/
+            document.addEventListener('keydown',function(e){
+                console.log("You pressed ")
+                console.log(e);
+                if(e.keyCode==39){        //right movement
+                    player.x+=player.speedX;        
+                }
+                if(e.keyCode==37){        //left movement
+                    player.x-=player.speedX;       
+                }
+            });
+			
 			function draw(){
                 pen.clearRect(0,0,GAME_W,GAME_H);
                 /*pen.fillStyle = "green";
@@ -110,11 +123,9 @@
                 pen.drawImage(goalimg,goal.x,goal.y,goal.w,goal.h);
             }
 			
-			function isColliding(r1,r2)
-            {
+			function isColliding(r1,r2){
                 var firstCondition = Math.abs(r1.x-r2.x) <=60;
-                var secondCondition = Math.abs(r1.y-r2.y) <=60;
-                
+                var secondCondition = Math.abs(r1.y-r2.y) <=60; 
                 return firstCondition && secondCondition ? true : false;
             }
 			
@@ -164,10 +175,10 @@
                 {
                     enemy4.speedY*=-1;
                 }
-                if(player.ismoving==true)
+                /*if(player.ismoving==true)
                 {
                     player.x+=player.speedX;    
-                }
+                }*/
 			}
 			
 			function render(){
