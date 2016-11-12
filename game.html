@@ -201,25 +201,39 @@
                 {
                     enemy4.speedY*=-1;
                 }
-                /*if(player.ismoving==true)
+                /*
+                if(player.ismoving==true)
                 {
                     player.x+=player.speedX;    
-                }*/
+                }
+                */
                 if(player.left==true)
                 {
-                    player.x-=player.speedX;
+                    if(player.x!=0)
+                    {
+                        player.x-=player.speedX;
+                    }
                 }
                 if(player.right==true)
                 {
-                    player.x+=player.speedX;
+                    if(player.x!=GAME_W-60)
+                    {
+                        player.x+=player.speedX;
+                    }
                 }
                 if(player.up==true)
                 {
-                    player.y-=player.speedY;
+                    if(player.y!=0)
+                    {
+                        player.y-=player.speedY;
+                    }
                 }
                 if(player.down==true)
                 {
-                    player.y+=player.speedY;
+                    if(player.y!=GAME_H-60)
+                    {
+                        player.y+=player.speedY;
+                    }
                 }
 			}
 			
