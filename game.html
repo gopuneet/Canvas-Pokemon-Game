@@ -21,10 +21,10 @@
             var canvas = document.getElementById('mycanvas');
             var pen = canvas.getContext('2d');
             /*
-			pen.fillStyle = "orange";
+            pen.fillStyle = "orange";
             pen.fillRect(50,50,100,100);
             pen.fillStyle = "rgba(100,10,20,1)"; // a is opacity. 1->opaque , 0->transparent
-            pen.fillRect(150,150,60,60);    
+            pen.fillRect(150,150,60,60);
             */
             
             var enemy1 = {
@@ -54,14 +54,14 @@
                 w:60,
                 h:60,
                 speedY:8,
-            }
+            };
             var player = {
                 x:10,
                 y:330,
                 w:60,
                 h:60,
-                speedX:6,
-                speedY:6,
+                speedX:5,
+                speedY:5,
                 //ismoving:false,
                 left:false,
                 right:false,
@@ -74,7 +74,7 @@
                 w:80,
                 h:80,
             };
-			
+            
             var playerimg = new Image;
             playerimg.src = 'Assets/ball.png';
             
@@ -86,50 +86,50 @@
             enemy3img.src = 'Assets/gengar.png';
             var enemy4img = new Image;
             enemy4img.src = 'Assets/drowsy.png';
-
+            
             var goalimg = new Image;
             goalimg.src = 'Assets/pika.png';
             
-			/*
-			canvas.addEventListener('mousedown',function(){
+            /*
+            canvas.addEventListener('mousedown',function(){
                 player.ismoving=true;
             });
             canvas.addEventListener('mouseup',function(){
                 player.ismoving=false;
             });
-        	*/
+            */
             document.addEventListener('keydown',function(e){
                 console.log("You pressed ")
                 console.log(e);
                 if(e.keyCode==39){        //right movement
-                    player.right=true;        
+                    player.right=true;
                 }
                 if(e.keyCode==37){        //left movement
-                    player.left=true;       
+                    player.left=true;
                 }
                 if(e.keyCode==38){        //upward movement
-                    player.up=true;        
+                    player.up=true;
                 }
                 if(e.keyCode==40){        //downward movement
-                    player.down=true;        
+                    player.down=true;
                 }
             });
 			document.addEventListener('keyup',function(e){
                 if(e.keyCode==39){        //right movement
-                    player.right=false;        
+                    player.right=false;
                 }
                 if(e.keyCode==37){        //left movement
-                    player.left=false;       
+                    player.left=false;
                 }
                 if(e.keyCode==38){        //upward movement
-                    player.up=false;        
+                    player.up=false;
                 }
                 if(e.keyCode==40){        //downward movement
-                    player.down=false;        
+                    player.down=false;
                 }
             });
             
-			function draw(){
+            function draw(){
                 pen.clearRect(0,0,GAME_W,GAME_H);
                 /*
                 pen.fillStyle = "green";
@@ -148,14 +148,14 @@
                 pen.drawImage(enemy4img,enemy4.x,enemy4.y,enemy4.w,enemy4.h);
                 pen.drawImage(goalimg,goal.x,goal.y,goal.w,goal.h);
             }
-			
-			function isColliding(r1,r2){
+            
+            function isColliding(r1,r2){
                 var firstCondition = Math.abs(r1.x-r2.x) <=60;
-                var secondCondition = Math.abs(r1.y-r2.y) <=60; 
+                var secondCondition = Math.abs(r1.y-r2.y) <=60;
                 return firstCondition && secondCondition ? true : false;
             }
-			
-			function update(){
+            
+            function update(){
                 if(isColliding(player,enemy1))
                 {
                     alert("Game Over!");
@@ -204,40 +204,40 @@
                 /*
                 if(player.ismoving==true)
                 {
-                    player.x+=player.speedX;    
+                    player.x+=player.speedX;
                 }
                 */
                 if(player.left==true)
                 {
-                    if(player.x!=0)
+                    if(player.x>0)
                     {
                         player.x-=player.speedX;
                     }
                 }
                 if(player.right==true)
                 {
-                    if(player.x!=GAME_W-60)
+                    if(player.x<GAME_W-60)
                     {
                         player.x+=player.speedX;
                     }
                 }
                 if(player.up==true)
                 {
-                    if(player.y!=0)
+                    if(player.y>0)
                     {
                         player.y-=player.speedY;
                     }
                 }
                 if(player.down==true)
                 {
-                    if(player.y!=GAME_H-60)
+                    if(player.y<GAME_H-60)
                     {
                         player.y+=player.speedY;
                     }
                 }
-			}
-			
-			function render(){
+            }
+            
+            function render(){
                 console.log("In Render!");
                 draw();
                 update();
@@ -246,7 +246,7 @@
                 }
             }
             
-			render();
-    	</script>	
+            render();
+        </script>
     </body>
 </html>
