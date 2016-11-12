@@ -3,120 +3,182 @@
         <title>Pokemon Game</title>
         <style>
             canvas{
-                border:5px solid orange;
-                background: url('Assets/background.jpg');
-                background-size:cover;
+                border:5px solid blue;
+                background: url(Assets/background.jpg);
+                background-size: cover;
             }
         </style>
     </head>
     <body>
-        <p>PokeMon Game</p>
-        <canvas id='myCanvas' width="500px" height="400px">
+<!--        <p>Pokemon Game</p>-->
+        <canvas id='mycanvas' width="1200px" height="720px">
+        
         </canvas>
         
-    <script>
-		var GAME_W = 500;
-    	var GAME_H = 400;
-    	var game_over = false;
-        var canvas=document.getElementById('myCanvas');
-		var pen = canvas.getContext('2d');
-    	/*
-        pen.fillStyle = "orange";
-        pen.fillRect(50,50,100,100);
-        pen.fillStyle = "rgba(100,10,20,1)"; // a is opacity. 1->opaque , 0->transparent
-        pen.fillRect(150,150,60,60);    
-        */
-        
-    	var enemy = {
-        	x:150,
-        	y:150,
-        	w:60,
-        	h:60,
-        	speedY:5,  
-    	}; 
-     	var player = {
-        	x:10,
-        	y:200,
-        	w:60,
-        	h:60,
-        	speedX:5,
-        	isMoving:false,
-    	};
-    	var goal = {
-        	x:GAME_W-100,
-        	y:200,
-        	w:60,
-        	h:60,  
-    	};
-    	var playerImg = new Image;
-    	playerImg.src = 'Assets/ball.png';
-    	
-		var enemyImg = new Image;
-    	enemyImg.src = 'Assets/gengar.png';
-		
-    	var goalImg = new Image;
-    	goalImg.src = 'Assets/pika.png';
-        
-    	canvas.addEventListener('mousedown',function(){
-        	//player.x += player.speedX;                    
-        	player.isMoving =true;
-    	});
-    	canvas.addEventListener('mouseup',function(){
-        	//player.x += player.speedX;                    
-        	player.isMoving =false;
-    	});
-        
-    	function isColliding(r1,r2){
-        	var firstCond = Math.abs(r1.x - r2.x) <= 50;
-        	var secondCond = Math.abs(r1.y - r2.y) <= 50;
-        	return firstCond && secondCond ? true : false;
-        }
-        
-        function draw(){
-        	pen.clearRect(0,0,GAME_W,GAME_H);
-        	/*
-            pen.fillStyle = "green";
-            pen.fillRect(enemy.x,enemy.y,enemy.w,enemy.h);
-                
-            pen.fillStyle = "blue";
-            pen.fillRect(player.x,player.y,player.w,player.h);
-                
-            pen.fillStyle = "red";
-            pen.fillRect(goal.x,goal.y,goal.w,goal.h);
+        <script>
+            var GAME_W = 1200;
+            var GAME_H = 720;
+            var game_over = false;
+            var canvas = document.getElementById('mycanvas');
+            var pen = canvas.getContext('2d');
+            /*pen.fillStyle = "orange";
+            pen.fillRect(50,50,100,100);
+            pen.fillStyle = "rgba(100,10,20,1)"; // a is opacity. 1->opaque , 0->transparent
+            pen.fillRect(150,150,60,60);    
             */
-      		pen.drawImage(playerImg,player.x,player.y,player.w,player.h);
-        	pen.drawImage(enemyImg,enemy.x,enemy.y,enemy.w,enemy.h);
-        	pen.drawImage(goalImg,goal.x,goal.y,goal.w,goal.h);
-    	}
-		
-    	function update(){
-        	enemy.y += enemy.speedY;
-        	if(enemy.y>=GAME_H - enemy.h - 10 || enemy.y <= 10){
-           	    enemy.speedY *= -1;
-        	}
-        	if(player.isMoving==true){
-            	player.x += player.speedX;
-        	}
-        	if(isColliding(player,enemy)){
-           	    alert("Game Over!");
-                game_over = true;
-        	}
-        	if(isColliding(player,goal)){
-                alert("You Won !");
-                game_over = true;
-        	}
-    	}
-		
-		function render(){
-       		console.log("In Render!");
-       		draw();
-       		update();
-       		if(game_over==false){
-                window.requestAnimationFrame(render);
-       	 	}   
-    	}
-    	render();
-    </script>
-	
+            
+            var enemy1 = {
+                x:210,
+                y:150,
+                w:60,
+                h:60,
+                speedY:5,
+            };
+            var enemy2 = {
+                x:450,
+                y:150,
+                w:60,
+                h:60,
+                speedY:7,
+            };
+            var enemy3 = {
+                x:690,
+                y:150,
+                w:60,
+                h:60,
+                speedY:6,
+            };
+            var enemy4 = {
+                x:930,
+                y:150,
+                w:60,
+                h:60,
+                speedY:8,
+            }
+            var player = {
+                x:10,
+                y:330,
+                w:60,
+                h:60,
+                speedX:6,
+                ismoving:false,
+            };
+            var goal = {
+                x:GAME_W-90,
+                y:320,
+                w:80,
+                h:80,
+            };
+            var playerimg = new Image;
+            playerimg.src = 'Assets/ball.png';
+            
+            var enemy1img = new Image;
+            enemy1img.src = 'Assets/gengar.png';
+            var enemy2img = new Image;
+            enemy2img.src = 'Assets/drowsy.png';
+            var enemy3img = new Image;
+            enemy3img.src = 'Assets/gengar.png';
+            var enemy4img = new Image;
+            enemy4img.src = 'Assets/drowsy.png';
+
+            var goalimg = new Image;
+            goalimg.src = 'Assets/pika.png';
+        
+			canvas.addEventListener('mousedown',function(){
+                player.ismoving=true;
+            });
+            canvas.addEventListener('mouseup',function(){
+                player.ismoving=false;
+            });
+        	
+			function draw(){
+                pen.clearRect(0,0,GAME_W,GAME_H);
+                /*pen.fillStyle = "green";
+                pen.fillRect(enemy.x,enemy.y,enemy.w,enemy.h);
+                
+                pen.fillStyle = "blue";
+                pen.fillRect(player.x,player.y,player.w,player.h);
+                
+                pen.fillStyle = "red";
+                pen.fillRect(goal.x,goal.y,goal.w,goal.h);
+                */
+                pen.drawImage(playerimg,player.x,player.y,player.w,player.h);
+                pen.drawImage(enemy1img,enemy1.x,enemy1.y,enemy1.w,enemy1.h);
+                pen.drawImage(enemy2img,enemy2.x,enemy2.y,enemy2.w,enemy2.h);
+                pen.drawImage(enemy3img,enemy3.x,enemy3.y,enemy3.w,enemy3.h);
+                pen.drawImage(enemy4img,enemy4.x,enemy4.y,enemy4.w,enemy4.h);
+                pen.drawImage(goalimg,goal.x,goal.y,goal.w,goal.h);
+            }
+			
+			function isColliding(r1,r2)
+            {
+                var firstCondition = Math.abs(r1.x-r2.x) <=60;
+                var secondCondition = Math.abs(r1.y-r2.y) <=60;
+                
+                return firstCondition && secondCondition ? true : false;
+            }
+			
+			function update(){
+                if(isColliding(player,enemy1))
+                {
+                    alert("Game Over!");
+                    game_over=true;
+                }
+                if(isColliding(player,enemy2))
+                {
+                    alert("Game Over!");
+                    game_over=true;
+                }
+                if(isColliding(player,enemy3))
+                {
+                    alert("Game Over!");
+                    game_over=true;
+                }
+                if(isColliding(player,enemy4))
+                {
+                    alert("Game Over!");
+                    game_over=true;
+                }
+                if(isColliding(player,goal))
+                {
+                    alert("You Win!");
+                    game_over=true;
+                }
+                enemy1.y+=enemy1.speedY;
+                enemy2.y+=enemy2.speedY;
+                enemy3.y+=enemy3.speedY;
+                enemy4.y+=enemy4.speedY;
+                if(enemy1.y>=GAME_H - enemy1.h || enemy1.y<=0)
+                {
+                    enemy1.speedY*=-1;
+                }
+                if(enemy2.y>=GAME_H - enemy2.h || enemy2.y<=0)
+                {
+                    enemy2.speedY*=-1;
+                }
+                if(enemy3.y>=GAME_H - enemy3.h || enemy3.y<=0)
+                {
+                    enemy3.speedY*=-1;
+                }
+                if(enemy4.y>=GAME_H - enemy4.h || enemy4.y<=0)
+                {
+                    enemy4.speedY*=-1;
+                }
+                if(player.ismoving==true)
+                {
+                    player.x+=player.speedX;    
+                }
+			}
+			
+			function render(){
+                console.log("In Render!");
+                draw();
+                update();
+                if(game_over==false){
+                    window.requestAnimationFrame(render);
+                }
+            }
+			render();
+    	</script>	
     </body>
 </html>
